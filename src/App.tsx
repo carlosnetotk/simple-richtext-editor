@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from './styles/AppStyle';
 import GlobalStyle from './styles/GlobalStyle';
-import { Editor, EditorState } from 'draft-js';
+import { DraftHandleValue, Editor, EditorState, RichUtils } from 'draft-js';
 
 
 function App() {
@@ -11,12 +11,23 @@ function App() {
   const onChange = (editorState: EditorState) => {
     setEditState(editorState);
   }
+  const handleKeyCommand = (command: DraftHandleValue): DraftHandleValue => {
+    const newState = RichUtils.handleKeyCommand(editState, command);
+
+    if (newState) {
+      onChange(newState);
+      return 'handled'
+    }
+
+    return 'not-handled';
+
+  }
 
   return (
     <>
       <GlobalStyle />
       <Container>
-        <Editor editorState={editState} onChange={onChange} />
+        <Editor handleKeyCommand={handleKeyCommand} editorState={editState} onChange={onChange} />
       </Container>
     </>
   );
