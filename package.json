@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/draft-js": "^0.10.44",
     "@types/styled-components": "^5.1.7"
   }
 }
