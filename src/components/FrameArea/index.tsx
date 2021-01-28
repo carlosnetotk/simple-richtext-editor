@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Container } from './styles';
 import { DraftHandleValue, Editor, EditorState, RichUtils } from 'draft-js';
+import EditorButtons from '../EditorButtons';
 
-export interface ICallBack {
-    (editorState: EditorState): void
-}
 
 const FrameArea: React.FC = () => {
 
@@ -27,6 +25,7 @@ const FrameArea: React.FC = () => {
 
     return (
         <Container>
+            <EditorButtons editState={editState} callBack={onChange} />
             <Editor handleKeyCommand={handleKeyCommand} editorState={editState} onChange={onChange} />
         </Container>
     );
